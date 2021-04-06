@@ -1,0 +1,199 @@
+@keyframes bezene-slide-left
+    0%
+        transform: translateX(400px)
+    100%
+        transform: translateX(0)
+@keyframes bezene-slide-right
+    0%
+        transform: translateX(0)
+    100%
+        transform: translateX(400px)
+    
+.notification-benzene
+    position: fixed
+    top: 40%
+    right: 3rem
+    display: none
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    background: #fff
+    min-height: 3rem
+    max-width: 18rem
+    font-weight: bold
+    font-size: 0.815rem
+    line-height: 1.25rem
+    border-radius: 0.5rem
+    padding: 0.5rem 0.25rem 0.5rem 0
+    &.slide-left
+        animation: bezene-slide-left 0.4s forwards
+    &.slide-right
+        animation: bezene-slide-right 0.4s forwards
+    i
+        margin: 0 0.375rem
+    &.error
+        border-left: 0.3rem solid #dd250dd8
+        color: #dd250dd8
+        display: flex
+        align-items: center
+        i
+            box-sizing: border-box
+            position: relative
+            display: block
+            transform: scale(var(--ggs,1))
+            width: 22px
+            height: 22px
+            border: 2px solid
+            border-radius: 40px
+            &::before, &::after
+                content: ""
+                display: block
+                box-sizing: border-box
+                position: absolute
+                width: 12px
+                height: 2px
+                background: currentColor
+                transform: rotate(45deg)
+                border-radius: 5px
+                top: 8px
+                left: 3px
+            &::after 
+                transform: rotate(-45deg)
+        
+                
+    &.success
+        border-left: 0.3rem solid #1ea11e
+        color: #1ea11e
+        display: flex
+        align-items: center
+        i
+            box-sizing: border-box
+            position: relative
+            display: block
+            width: 22px
+            height: 22px
+            border-radius: 99px
+            border: 2px solid #1ea11e 
+            &::after
+                content: ""
+                display: block
+                box-sizing: border-box
+                position: absolute
+                left: 3px
+                top: -1px
+                width: 6px
+                height: 10px
+                border-color: #1ea11e  
+                border-width: 0 2px 2px 0
+                border-style: solid
+                transform-origin: bottom left
+                transform: rotate(45deg)
+.form-benzene
+    width: 100%
+    display: flex
+    flex-direction: column
+    padding: 8px
+    background: #4e3284
+    input, textarea
+        &:focus
+            outline: none
+        &:disabled
+            background: #2f2641b4
+            cursor: not-allowed
+        &:disabled::placeholder
+            color: #cccccc
+        &::placeholder
+            color: #cccccc
+       
+    input
+        height: 2.5rem
+        border: none
+        border-radius: 99px
+        background: #9b87c2ab
+        color: #fff
+        padding: 0 0.75rem
+         &[type=number]::-webkit-outer-spin-button, &[type=number]::-webkit-inner-spin-button
+            -webkit-appearance: none
+        &[type=number]
+            -moz-appearance: textfield
+    label
+        margin: 1rem 0 0.75rem 0.375rem
+        font-size: 0.875rem
+        color: white
+        span
+            color: #fc4545
+            font-weight: bold
+    textarea
+        height: 100px
+        border-radius: 10px
+        margin-bottom: 12px
+        border: none
+        background: #9b87c2ab
+        color: #fff
+        resize: none
+        padding: 0.5rem 0.75rem
+    span
+        color: #2dd5ff
+        font-size: 12px
+    button[type="submit"]
+        border: none
+        outline: none
+        cursor: pointer
+        height: 2.25rem
+        width: 8.75rem
+        border-radius: 99px
+        margin: 0 auto
+        margin-top: 1rem
+        background: #fd6620
+        display: flex
+        justify-content: center
+        align-items: center
+        color: white
+        transition: background 0.3s
+        &:hover
+            background: #e94a00
+        &:disabled
+            background: #2f2641b4
+            cursor: not-allowed
+        span
+            color: #fff
+            font-size: 16px
+            &[loading-spiner]
+                display: none
+            svg
+                path, rect
+                    fill: #ff5100
+    p
+        margin: 1rem 0
+        text-align: center
+        transition: all 0.3s
+        &.success
+            color: #2bec2b 
+            i
+                margin: 0 0.5rem
+                width: 8px
+                height: 16px
+                display: inline-block
+                border-right: 3px solid #2bec2b 
+                border-bottom: 3px solid #2bec2b
+                transform: rotate(40deg)
+                    
+        &.error
+            color: #ff533cd8
+            i
+                margin: 0 0.5rem
+                &::before, &::after
+                    position: relative
+                    height: 18px 
+                    top: 0.25rem
+                    width: 3px
+                    display: inline-block
+                    background: #ff533cd8
+                    content: ''
+                &::before
+                    transform: rotate(45deg)
+                &::after
+                    transform: rotate(-45deg)
+                    left: -3px
+                
+            
+
+    
