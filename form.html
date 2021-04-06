@@ -45,17 +45,17 @@
   <div class="notification-benzene">
     <span><i></i></span> <span class="notification-benzene__message"></span>
   </div>
-  <form action="" class="form-benzene" id="footer-form">
-    <label for="fullname" required>Họ Tên <span>(*)</span></label>
+  <div  class="form-benzene" id="footer-form">
+    <label for="fullname">Họ Tên <span>(*)</span></label>
     <input type="text" placeholder="Nhập vào họ tên của bạn" id="footer-fullname" required />
     <!-- <label for="email" required>Email</label>
       <input type="email" placeholder="Nhập vào email của bạn" required> -->
-    <label for="phone" required>Số điện thoại <span>(*)</span></label>
-    <input type="number" name="phone" id="footer-phone" placeholder="Nhập vào số điện thoại..." />
-    <label for="subject" required>Nội dung yêu cầu <span>(*)</span></label>
-    <textarea name="subject" id="footer-subject" rows="4" cols="50" required placeholder="Nhập vào nội dung hỗ trợ ..."></textarea>
+    <label for="phone" >Số điện thoại <span>(*)</span></label>
+    <input type="number" name="phone" id="footer-phone" placeholder="Nhập vào số điện thoại..." required/>
+    <label for="subject">Nội dung yêu cầu <span>(*)</span></label>
+    <textarea type="text" name="subject" id="footer-subject" rows="4" cols="50" required placeholder="Nhập vào nội dung hỗ trợ ..."></textarea>
     <span><i>(*) Yêu cầu nhập đầy đủ thông tin.</i></span>
-    <button type="submit">
+    <button type="submit" id="footer-btn-submit">
       <span id="footer-text-btn">Gửi yêu cầu</span>
       <span id="footer-loading" loading-spiner>
         <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -73,7 +73,7 @@
         </svg>
       </span>
     </button>
-  </form>
+  </div>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="./form.js"></script>

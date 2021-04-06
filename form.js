@@ -1,26 +1,22 @@
 const URL_CONTACT_ENDPOINT = `https://fadi-api.herokuapp.com/api/init-contact`;
 const SUCCESS_MESSAGE = `Yêu cầu của bạn đã được gửi đi, xin cảm ơn!`;
-const ERROR_MESSAGE = `Có lỗi xảy ra, vui lòng thử lại sau`;
-const IS_REQUIRED_INPUTS_MESSAGE = `Bạn cần nhập đầy đủ thông tin trước khi gửi!`;
+let ERROR_MESSAGE = `Có lỗi xảy ra, vui lòng thử lại sau`;
 const contact = {};
 const price = "";
 const url = window.location;
-let form;
-let phone;
-let fullname;
-let btnSubmitPrice;
-let htmlBtnPrice;
-let closePriceFormBtn;
-let loadingFormPrice;
-let formPriceContainer;
-let inputPriceElemtGroup;
-let formPriceElemtGroup;
+// let form;
+// let phone;
+// let fullname;
+// let btnSubmitPrice;
+// let htmlBtnPrice;
+// let closePriceFormBtn;
+// let loadingFormPrice;
+// let formPriceContainer;
+// let inputPriceElemtGroup;
+// let formPriceElemtGroup;
 let notification;
 let notification_message;
 (($) => {
-    //set up notification
-    notification = $('.notification-benzene');
-    notification_message = $('.notification-benzene__message');
 
     //hide notification with timeout
     $.fn.hideNotification = (timeOut) => {
@@ -51,21 +47,12 @@ let notification_message;
                 $().hideNotification(timeOut);
             }, timeOut);
         } else {
-            if(isEmptyInput) {
-                $().showNotification(true);
-                notification_message.html(IS_REQUIRED_INPUTS_MESSAGE);
-                notification.removeClass('success').addClass('error');
-                setTimeout(() => {
-                    $().hideNotification(timeOut);
-                }, timeOut);
-            } else {
-                $().showNotification(true);
-                notification_message.html(ERROR_MESSAGE);
-                notification.removeClass('success').addClass('error');
-                setTimeout(() => {
-                    $().hideNotification(timeOut);
-                }, timeOut)
-            }
+            $().showNotification(true);
+            notification_message.html(ERROR_MESSAGE);
+            notification.removeClass('success').addClass('error');
+            setTimeout(() => {
+                $().hideNotification(timeOut);
+            }, timeOut)
         }
     }
 
@@ -106,14 +93,63 @@ let notification_message;
         $(`#${elementPrefixId}-text-btn`).text('Gửi yêu cầu');
     }
 
+    //reset form
+    $.fn.resetForm = (elementPrefixId) => {
+        $(`#${elementPrefixId}-form :input`).val('');
+        $(`#${elementPrefixId}-text-btn`).text('Gửi yêu cầu');
+    }
 
-    //check  is valid form  
-    $.fn.sendContactToServer = () => {
+    //get contact data
+    $.fn.getContactData = (elementPrefixId, isPriceForm) => {
+        if(isPriceForm) {
+            contact.text = price;
+        } else {
+            contact.text = $(`#${elementPrefixId}-subject`).val('');
+        }
+        contact.url = url;
+        contact.phone = $(`#${elementPrefixId}-phone`).val('');
+        contact.fullname =  $(`#${elementPrefixId}-fullname`).val('');
+        return contact;
+    }
+
+    //check every field input not empty 
+    $.fn.isFormValid = (elementPrefixId) => {
+        let isValid = true;
+        $(`#${elementPrefixId}-form :input[type="text"]`).each(function() {
+            if ($(this).val().trim() === '') {
+                ERROR_MESSAGE = `Thông tịn không được để trống.`
+                isValid = false;
+               return;
+            }
+         });
+        if(!isValid) return isValid;
+        $(`#${elementPrefixId}-form :input[type="number"]`).each(function() {
+            if (!$.isNumeric($(this).val().trim())) {
+                ERROR_MESSAGE = `Nhập sai định dạng số`
+                isValid = false;
+               return;
+            }
+         });
+        if(!isValid) return isValid;
+        let phone = $(`#${elementPrefixId}-phone`)
+        if(phone.val().trim().length <= 7) {
+            ERROR_MESSAGE = `Nhập sai định dạng số điện thoại.`
+            isValid = false;
+        }
+        return isValid;
+    }
+    $.fn.sendRequestToServer = () => {
         return;
     }
 })(jQuery)
 
 jQuery(document).ready(($) => {
-    $().disableFormWhenSubmit('footer');
-    $().changeStateOfNotification(true, 1000, null);
+    notification = $('.notification-benzene');
+    notification_message = $('.notification-benzene__message');
+    // $().disableForm('footer');
+    $().changeStateOfNotification(true, 100000, null);
+    $('#footer-btn-submit').click(()=>{
+        if($().isFormValid('footer')) console.log('ok')
+        else console.log(ERROR_MESSAGE);
+    })
 })
