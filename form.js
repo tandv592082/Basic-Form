@@ -186,6 +186,6 @@ const url = window.location;
 })(jQuery)
 
 jQuery(document).ready(function($) {
-    
     let footerForm = $().Form();
+    let contactForm = $().Form(null, 'contact', null, null);
 });
