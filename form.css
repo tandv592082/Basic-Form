@@ -160,7 +160,7 @@
           transform: rotate(45deg);
 }
 
-.form-benzene {
+#form-benzene {
   width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -173,48 +173,48 @@
   background: #4e3284;
 }
 
-.form-benzene input:focus, .form-benzene textarea:focus {
+#form-benzene input:focus, #form-benzene textarea:focus {
   outline: none;
 }
 
-.form-benzene input:disabled, .form-benzene textarea:disabled {
+#form-benzene input:disabled, #form-benzene textarea:disabled {
   background: #2f2641b4;
   cursor: not-allowed;
 }
 
-.form-benzene input:disabled::-webkit-input-placeholder, .form-benzene textarea:disabled::-webkit-input-placeholder {
+#form-benzene input:disabled::-webkit-input-placeholder, #form-benzene textarea:disabled::-webkit-input-placeholder {
   color: #cccccc;
 }
 
-.form-benzene input:disabled:-ms-input-placeholder, .form-benzene textarea:disabled:-ms-input-placeholder {
+#form-benzene input:disabled:-ms-input-placeholder, #form-benzene textarea:disabled:-ms-input-placeholder {
   color: #cccccc;
 }
 
-.form-benzene input:disabled::-ms-input-placeholder, .form-benzene textarea:disabled::-ms-input-placeholder {
+#form-benzene input:disabled::-ms-input-placeholder, #form-benzene textarea:disabled::-ms-input-placeholder {
   color: #cccccc;
 }
 
-.form-benzene input:disabled::placeholder, .form-benzene textarea:disabled::placeholder {
+#form-benzene input:disabled::placeholder, #form-benzene textarea:disabled::placeholder {
   color: #cccccc;
 }
 
-.form-benzene input::-webkit-input-placeholder, .form-benzene textarea::-webkit-input-placeholder {
+#form-benzene input::-webkit-input-placeholder, #form-benzene textarea::-webkit-input-placeholder {
   color: #cccccc;
 }
 
-.form-benzene input:-ms-input-placeholder, .form-benzene textarea:-ms-input-placeholder {
+#form-benzene input:-ms-input-placeholder, #form-benzene textarea:-ms-input-placeholder {
   color: #cccccc;
 }
 
-.form-benzene input::-ms-input-placeholder, .form-benzene textarea::-ms-input-placeholder {
+#form-benzene input::-ms-input-placeholder, #form-benzene textarea::-ms-input-placeholder {
   color: #cccccc;
 }
 
-.form-benzene input::placeholder, .form-benzene textarea::placeholder {
+#form-benzene input::placeholder, #form-benzene textarea::placeholder {
   color: #cccccc;
 }
 
-.form-benzene input {
+#form-benzene input {
   height: 2.25rem;
   border: none;
   border-radius: 99px;
@@ -224,30 +224,30 @@
   padding: 0 0.75rem;
 }
 
-.form-benzene input[type='number']::-webkit-outer-spin-button, .form-benzene input[type=number]::-webkit-inner-spin-button {
+#form-benzene input[type='number']::-webkit-outer-spin-button, #form-benzene input[type=number]::-webkit-inner-spin-button {
   -webkit-appearance: none;
 }
 
-.form-benzene input[type='number'] {
+#form-benzene input[type='number'] {
   -moz-appearance: textfield;
 }
 
-.form-benzene label {
+#form-benzene label {
   margin: 0.75rem 0 0.25rem 0.25rem;
   font-size: 0.875rem;
   color: white;
 }
 
-.form-benzene label:nth-child(1) {
+#form-benzene label:nth-child(1) {
   margin-top: 0;
 }
 
-.form-benzene label span {
+#form-benzene label span {
   color: #fc4545;
   font-weight: bold;
 }
 
-.form-benzene textarea {
+#form-benzene textarea {
   height: 100px;
   border-radius: 10px;
   margin-bottom: 12px;
@@ -258,12 +258,12 @@
   padding: 0.5rem 0.75rem;
 }
 
-.form-benzene span {
+#form-benzene span {
   color: #2dd5ff;
   font-size: 10px;
 }
 
-.form-benzene button[type="submit"] {
+#form-benzene button[type="submit"] {
   border: none;
   outline: none;
   cursor: pointer;
@@ -287,25 +287,25 @@
   transition: background 0.3s;
 }
 
-.form-benzene button[type="submit"]:hover {
+#form-benzene button[type="submit"]:hover {
   background: #e94a00;
 }
 
-.form-benzene button[type="submit"]:disabled {
+#form-benzene button[type="submit"]:disabled {
   background: #2f2641b4;
   cursor: not-allowed;
 }
 
-.form-benzene button[type="submit"] span {
+#form-benzene button[type="submit"] span {
   color: #fff;
   font-size: 16px;
 }
 
-.form-benzene button[type="submit"] span[loading-spiner] {
+#form-benzene button[type="submit"] span[loading-spiner] {
   display: none;
 }
 
-.form-benzene button[type="submit"] span svg path, .form-benzene button[type="submit"] span svg rect {
+#form-benzene button[type="submit"] span svg path, #form-benzene button[type="submit"] span svg rect {
   fill: #ff5100;
 }
 /*# sourceMappingURL=form.css.map */

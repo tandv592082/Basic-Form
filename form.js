@@ -55,7 +55,7 @@ const url = window.location;
         _self.elementPrefixId = elementPrefixId ? elementPrefixId : DEFAULT_ELEMENT_PREFIX_ID;
         _self.timeOut = timeOut ? timeOut : DEFAULT_TIMEOUT;
         _self.urlContactApi = urlContactApi ? urlContactApi : DEFAULT_URL_CONTACT_API;
-        _self.form = $(`#${_self.elementPrefixId}-form`);
+        _self.form = $(`.${_self.elementPrefixId}-form`);
         let noti = $().Notification(_self.timeOut);
     
         /**
@@ -75,14 +75,14 @@ const url = window.location;
          * @param {string} elementPrefixId As prefix id of form
          */
          _self.disableForm = function() {
-            $(`#${_self.elementPrefixId}-form :input`).prop("disabled", true);
+            $(`.${_self.elementPrefixId}-form :input`).prop("disabled", true);
             $(`#${_self.elementPrefixId}-text-btn`).hide();
             $(`#${_self.elementPrefixId}-loading`).show();
         }
     
         //enable form when recive respone
         _self.enableForm = function() {
-            $(`#${_self.elementPrefixId}-form :input`).prop("disabled", false);
+            $(`.${_self.elementPrefixId}-form :input`).prop("disabled", false);
             $(`#${_self.elementPrefixId}-text-btn`).show();
             $(`#${_self.elementPrefixId}-loading`).hide();
         }
@@ -102,14 +102,14 @@ const url = window.location;
     
         //reset form
         _self.resetForm = function() {
-            $(`#${_self.elementPrefixId}-form :input`).val('');
+            $(`.${_self.elementPrefixId}-form :input`).val('');
             $(`#${_self.elementPrefixId}-text-btn`).text('Gửi yêu cầu');
         }
     
         //check every field input not empty 
         _self.isFormValid = function() {
             let isValid = true;
-            $(`#${_self.elementPrefixId}-form :input[type="text"]`).each(function() {
+            $(`.${_self.elementPrefixId}-form :input[type="text"]`).each(function() {
                 if ($(this).val().trim() === '') {
                     ERROR_MESSAGE = `Thông tịn không được để trống.`
                     isValid = false;
@@ -117,7 +117,7 @@ const url = window.location;
                 }
             });
             if(!isValid) return isValid;
-            $(`#${_self.elementPrefixId}-form :input[type="number"]`).each(function() {
+            $(`.${_self.elementPrefixId}-form :input[type="number"]`).each(function() {
                 if (!$.isNumeric($(this).val().trim())) {
                     ERROR_MESSAGE = `Nhập sai định dạng số`
                     isValid = false;
