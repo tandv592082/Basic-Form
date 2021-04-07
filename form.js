@@ -4,7 +4,7 @@ const DEFAULT_ELEMENT_PREFIX_ID = `footer`;
 const DEFAULT_SUCCESS_MESSAGE = `Yêu cầu của bạn đã được gửi đi, xin cảm ơn!`;
 let ERROR_MESSAGE = `Có lỗi xảy ra, vui lòng thử lại sau`;
 const contact = {};
-const price = "";
+let price = "";
 const url = window.location;
 
 function Notification(timeOut) {
@@ -52,15 +52,18 @@ function Notification(timeOut) {
 
 
 function Form(urlContactApi, elementPrefixId, timeOut) {
-    this.elementPrefixId = elementPrefixId ? elementPrefixId : DEFAULT_ELEMENT_PREFIX_ID;
-    this.timeOut = timeOut ? timeOut : DEFAULT_TIMEOUT;
-    this.urlContactApi = urlContactApi ? urlContactApi : DEFAULT_URL_CONTACT_API;
-    let noti = new Notification(this.timeOut);
+    let _self = this;
+
+    _self.elementPrefixId = elementPrefixId ? elementPrefixId : DEFAULT_ELEMENT_PREFIX_ID;
+    _self.timeOut = timeOut ? timeOut : DEFAULT_TIMEOUT;
+    _self.urlContactApi = urlContactApi ? urlContactApi : DEFAULT_URL_CONTACT_API;
+    _self.form = $(`#${_self.elementPrefixId}-form`);
+    let noti = new Notification(_self.timeOut);
     /**
      * Show then hide notification when submit
      * @param {boolean} isSucess Check respone is success?
      */
-    this.toggleNotificationState = function(isSucess) {
+     _self.toggleNotificationState = function(isSucess) {
         if(isSucess) {
             noti.showMessageWithSuccess();
         } else {
@@ -72,152 +75,111 @@ function Form(urlContactApi, elementPrefixId, timeOut) {
      * Disable form when submit
      * @param {string} elementPrefixId As prefix id of form
      */
-    this.disableForm = function() {
-        $(`#${this.elementPrefixId}-form :input`).prop("disabled", true);
-        $(`#${this.elementPrefixId}-text-btn`).hide();
-        $(`#${this.elementPrefixId}-loading`).show();
+     _self.disableForm = function() {
+        $(`#${_self.elementPrefixId}-form :input`).prop("disabled", true);
+        $(`#${_self.elementPrefixId}-text-btn`).hide();
+        $(`#${_self.elementPrefixId}-loading`).show();
     }
 
     //enable form when recive respone
-    this.enableForm = function() {
-        $(`#${this.elementPrefixId}-form :input`).prop("disabled", false);
-        $(`#${this.elementPrefixId}-text-btn`).show();
-        $(`#${this.elementPrefixId}-loading`).hide();
+    _self.enableForm = function() {
+        $(`#${_self.elementPrefixId}-form :input`).prop("disabled", false);
+        $(`#${_self.elementPrefixId}-text-btn`).show();
+        $(`#${_self.elementPrefixId}-loading`).hide();
     }
 
     //get contact data
-    this.getContactData = function() {
-        if($(`#${this.elementPrefixId}-subject`).val()) {
-            contact.text = $(`#${this.elementPrefixId}-subject`).val();
+    _self.getContactData = function() {
+        if($(`#${_self.elementPrefixId}-subject`).val()) {
+            contact.text = $(`#${_self.elementPrefixId}-subject`).val();
         } else {
             contact.text = price;
         }
         contact.url = url;
-        contact.phone = $(`#${this.elementPrefixId}-phone`).val();
-        contact.fullname =  $(`#${this.elementPrefixId}-fullname`).val();
+        contact.phone = $(`#${_self.elementPrefixId}-phone`).val();
+        contact.fullname =  $(`#${_self.elementPrefixId}-fullname`).val();
         return contact;
     }
 
     //reset form
-    this.resetForm = function() {
-        $(`#${this.elementPrefixId}-form :input`).val('');
-        $(`#${this.elementPrefixId}-text-btn`).text('Gửi yêu cầu');
+    _self.resetForm = function() {
+        $(`#${_self.elementPrefixId}-form :input`).val('');
+        $(`#${_self.elementPrefixId}-text-btn`).text('Gửi yêu cầu');
     }
 
     //check every field input not empty 
-    this.isFormValid = function() {
-        console.log('hix')
-        // let isValid = true;
-        // // $(`#${this.elementPrefixId}-form :input[type="text"]`).each(function() {
-        // //     if ($(this).val().trim() === '') {
-        // //         ERROR_MESSAGE = `Thông tịn không được để trống.`
-        // //         isValid = false;
-        // //     return;
-        // //     }
-        // // });
-        // // console.log(`Check form is valid1 -> ${isValid}`)
-        // // if(!isValid) return isValid;
-        // // $(`#${this.elementPrefixId}-form :input[type="number"]`).each(function() {
-        // //     if (!$.isNumeric($(this).val().trim())) {
-        // //         ERROR_MESSAGE = `Nhập sai định dạng số`
-        // //         isValid = false;
-        // //     return;
-        // //     }
-        // // });
-        // // console.log(`Check form is valid2 -> ${isValid}`)
-        // // if(!isValid) return isValid;
-        // // let phone = $(`#${this.elementPrefixId}-phone`);
-        // // if(phone.val().trim().length <= 7) {
-        // //     ERROR_MESSAGE = `Nhập sai định dạng số điện thoại.`;
-        // //     isValid = false;
-        // // }
-        // console.log(`Check form is valid3 -> ${isValid}`)
-        // // let subject = $(`#${this.elementPrefixId}-subject`);
-        // // if(!subject.val()) {
-        // //     if(price === '') let bla = '';
-        // // }
-        // console.log(`Check form is valid4 -> ${valid}`)
-        // return isValid;
+    _self.isFormValid = function() {
+        let isValid = true;
+        $(`#${_self.elementPrefixId}-form :input[type="text"]`).each(function() {
+            if ($(this).val().trim() === '') {
+                ERROR_MESSAGE = `Thông tịn không được để trống.`
+                isValid = false;
+            return;
+            }
+        });
+        if(!isValid) return isValid;
+        $(`#${_self.elementPrefixId}-form :input[type="number"]`).each(function() {
+            if (!$.isNumeric($(this).val().trim())) {
+                ERROR_MESSAGE = `Nhập sai định dạng số`
+                isValid = false;
+            return;
+            }
+        });
+        if(!isValid) return isValid;
+        let phone = $(`#${_self.elementPrefixId}-phone`);
+        if(phone.val().trim().length <= 7) {
+            ERROR_MESSAGE = `Nhập sai định dạng số điện thoại.`;
+            isValid = false;
+        }
+
+        let subject = $(`#${_self.elementPrefixId}-subject`);
+        // if(!subject.val()) {
+        //     if(price === '') {
+        //  handle error here
+        //}
+        // }
+
+        return isValid;
     }
 
     //send request to server
-    this.sendRequestToServer = function() {
-        this.disableForm();
-        fetch(this.urlContactApi, {
-            method: POST,
+    _self.sendRequestToServer = function() {
+        _self.disableForm();
+        fetch(_self.urlContactApi, {
+            method: 'POST',
             headers: {
                 'Accept': 'application/json, text/plain, */*',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(this.getContactData())
+            body: JSON.stringify(_self.getContactData())
         }).then(function(data) {
             return data.json();
         }).then(function(result) {
             if(result.success) {
                 setTimeout(function () {
-                    this.resetForm();
+                    _self.resetForm();
                 }, 300);        
-                this.toggleNotificationState(true);
+                _self.toggleNotificationState(true);
             } else {
-                this.toggleNotificationState(false);
+                _self.toggleNotificationState(false);
             }
         }).catch(function(err) {
-            this.toggleNotificationState(false);
+            _self.toggleNotificationState(false);
         }).finally(function() {
-            this.enableForm();
+            _self.enableForm();
         })
     }
 
-    this.isFormValid();
-    $(`#${this.elementPrefixId}-form`).submit(function(e) {
+    _self.form.submit(function(e) {
         e.preventDefault(e);
-        console.log('hix');
-        console.log(ERROR_MESSAGE)
-        const check = this.isFormValid();
-        console.log(`check-> ${check}`)
-        if(this.isFormValid()) {
-            this.sendRequestToServer();
+        if(_self.isFormValid()) {
+            _self.sendRequestToServer();
         } else {
-            this.toggleNotificationState(false);
+            _self.toggleNotificationState(false);
         }
     })
 
-    //check every field input not empty 
-    this.isFormValid = function() {
-        console.log('hix')
-        // let isValid = true;
-        // // $(`#${this.elementPrefixId}-form :input[type="text"]`).each(function() {
-        // //     if ($(this).val().trim() === '') {
-        // //         ERROR_MESSAGE = `Thông tịn không được để trống.`
-        // //         isValid = false;
-        // //     return;
-        // //     }
-        // // });
-        // // console.log(`Check form is valid1 -> ${isValid}`)
-        // // if(!isValid) return isValid;
-        // // $(`#${this.elementPrefixId}-form :input[type="number"]`).each(function() {
-        // //     if (!$.isNumeric($(this).val().trim())) {
-        // //         ERROR_MESSAGE = `Nhập sai định dạng số`
-        // //         isValid = false;
-        // //     return;
-        // //     }
-        // // });
-        // // console.log(`Check form is valid2 -> ${isValid}`)
-        // // if(!isValid) return isValid;
-        // // let phone = $(`#${this.elementPrefixId}-phone`);
-        // // if(phone.val().trim().length <= 7) {
-        // //     ERROR_MESSAGE = `Nhập sai định dạng số điện thoại.`;
-        // //     isValid = false;
-        // // }
-        // console.log(`Check form is valid3 -> ${isValid}`)
-        // // let subject = $(`#${this.elementPrefixId}-subject`);
-        // // if(!subject.val()) {
-        // //     if(price === '') let bla = '';
-        // // }
-        // console.log(`Check form is valid4 -> ${valid}`)
-        // return isValid;
-    }
-    return this;
+    return _self;
 
 }
 
@@ -502,18 +464,5 @@ function Form(urlContactApi, elementPrefixId, timeOut) {
 // })(jQuery)
 
 jQuery(document).ready(($) => {
-    // notification = $('.notification-benzene');
-    // notification_message = $('.notification-benzene__message');
-    // // $().changeStateOfNotification(true, 100000, null);
-    // // $('#footer-btn-submit').click(()=>{
-    // //     if($().isFormValid('footer')) console.log('ok')
-    // //     else console.log(ERROR_MESSAGE);
-    // // });
-    // // let fuck = $().testClass(100);
-    // // fuck.anotherMethod();
-    // const footerForm = $().Form();
-    // footerForm.initForm();
-    // let notification = new Notification(10000);
-    // notification.showMessageWithError();
     let form = new Form();
 })
